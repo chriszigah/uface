@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/' + 'pace.css')
+    }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/' + 'style.css')
+  }}"
+    />
+
+    <title>Flask - Face Recognition</title>
+  </head>
+  <body class="container">
+    <h1 class="mb-6">Flask - Face Recognition</h1>
+    <div class="sample_image">
+      <img
+        id="inputimage"
+        alt="Sample Image"
+        src="{{ url_for('static', filename='img/' + 'sample.PNG') }}"
+        width="500px"
+        heigh="auto"
+      />
+    </div>
+    <div class=" container facebox">
+      <form method="POST" action="/" enctype="multipart/form-data">
+        {% if message %}
+        <h4 style="color: red">{{ message }}</h4>
+        {% endif %}
+        <div class="form-control mb-2 mt-6">
+          <input type="file" class="form-control-file" name="file" />
+        </div>
+        <div class="row">
+          <div class="col text-center">
+            <div class="form-group">
+              <input
+                class="btn btn-info btn-lg"
+                type="submit"
+                value="Detect face(s)"
+              />
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="output_image">
+        <img
+          alt=""
+          {%
+          if
+          processed_img
+          %}
+          src="{{  url_for('static', filename='finish/' + processed_img ) }}"
+          {%
+          endif
+          %}
+          width="500px"
+          heigh="auto"
+        />
+      </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/' + 'pace.js')
+  }}"></script>
+  </body>
+</html>
