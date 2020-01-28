@@ -2,7 +2,7 @@
 
 ## Face Recognition app
 
-![App Image](https://github.com/efochristian/uface/flaskface/static/img/app_view.png)
+![App Image](https://github.com/efochristian/uface/app/static/img/sample.PNG)
 
 Up and Running (steps)
 
