@@ -2,7 +2,7 @@
 
 ## Face Recognition app
 
-![App Image](https://github.com/efochristian/uface/app/static/img/sample.PNG)
+![App Image](https://github.com/efochristian/uface/blob/master/app/static/img/app_view.png?raw=true)
 
 Up and Running (steps)
 
