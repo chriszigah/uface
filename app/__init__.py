@@ -3,10 +3,7 @@ import cv2, os, secrets
 from PIL import Image
 import cv2
 
-START_FOLDER_PATH = "flaskface/static/start/"
-FINISH_FOLDER_PATH = 'flaskface/static/finish/'
-
-face_app = Flask(__name__)
+uface = Flask(__name__)
 
 ACCEPTED_MIMETYPES = set(["image/jpeg", "image/jpg", "image/png"])
 
@@ -17,7 +14,7 @@ def save_picture(form_picture):
         form_picture.filename
     )  # _ underscore was used to throw away unused variable
     picture_fn = random_hex + f_ext
-    picture_path = os.path.join(app.root_path, "static/start", picture_fn)
+    picture_path = os.path.join(uface.root_path, "static/start", picture_fn)
     
     # Resize image
     output_size = (1024, 768)
@@ -39,11 +36,11 @@ def detect_face(img_to_detect):
     )
     eye_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_eye.xml")
 
-    img = cv2.imread(START_FOLDER_PATH + img_to_detect)
+    img = cv2.imread(os.path.join(uface.root_path, "static/start",img_to_detect))
 
     gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-    faces = face_cascade.detectMultiScale(gray_img, scaleFactor=1.2, minNeighbors=6)
+    faces = face_cascade.detectMultiScale(gray_img, scaleFactor=1.3, minNeighbors=6)
 
     for (x, y, w, h) in faces:
         img = cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 3)
@@ -56,9 +53,12 @@ def detect_face(img_to_detect):
                 roi_color, (ex, ey), (ex + ew, ey + eh), (255, 0, 0), 3
             )
 
-    fnp = (random_hex + ".jpg")  # file name and path for detected  faces
-    cv2.imwrite(FINISH_FOLDER_PATH + fnp, img)
+    sav_img_name = (random_hex + ".jpg")  # file name and path for detected  faces
+    
+    SAV_IMG_PATH = os.path.join(uface.root_path, "static/finish/" + sav_img_name)
+    
+    cv2.imwrite(SAV_IMG_PATH, img)
 
-    return fnp
+    return sav_img_name
 
 
